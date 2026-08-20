@@ -25,7 +25,7 @@ static inline int get_bus_width(i2s_parallel_sample_width_t width) {
   }
 }
 
-static void iomux_set_signal(int gpio, int signal) {
+void i2s_parallel_iomux_set_signal(int gpio, int signal) {
   if(gpio < 0) {
     return;
   }
@@ -117,9 +117,9 @@ esp_err_t i2s_parallel_driver_install(i2s_port_t port, i2s_parallel_config_t* co
   // Setup GPIOs
   int bus_width = get_bus_width(conf->sample_width);
   for(int i = 0; i < bus_width; i++) {
-    iomux_set_signal(conf->gpios_bus[i], iomux_signal_base + i);
+    i2s_parallel_iomux_set_signal(conf->gpios_bus[i], iomux_signal_base + i);
   }
-  iomux_set_signal(conf->gpio_clk, iomux_clock);
+  i2s_parallel_iomux_set_signal(conf->gpio_clk, iomux_clock);
 
   // Setup I2S peripheral
   i2s_dev_t* dev = I2S[port];

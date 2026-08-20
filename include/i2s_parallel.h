@@ -24,6 +24,8 @@ typedef struct {
   int                         sample_rate;
 } i2s_parallel_config_t;
 
+void i2s_parallel_iomux_set_signal(int gpio, int signal);
+
 esp_err_t i2s_parallel_driver_install(i2s_port_t port, i2s_parallel_config_t* conf, bool invert_clk, intr_handler_t irq_hndlr, void* priv);
 
 esp_err_t i2s_parallel_send_dma(i2s_port_t port, lldesc_t* dma_descriptor);
